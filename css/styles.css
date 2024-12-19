@@ -140,9 +140,7 @@ nav a.active {
 }
 
 .hero-logo {
-  max-width: 150px;
-  margin: 20px auto;
-  display: block;
+  max-width: 100px; /* Reduced from 150px */
 }
 
 /* Main Content */
@@ -322,6 +320,38 @@ form button:hover {
   gap: 10px;
   border-bottom: 1px solid #ddd; /* Subtle divider */
   padding-bottom: 10px;
+  position: relative;
+  padding-left: 40px; /* Space for the icon */
+  margin-bottom: 20px;
+}
+
+.schedule-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* Beginner Icon */
+.schedule-item.beginner::before {
+    background-color: #28a745; /* Green Circle */
+}
+
+/* Advanced Icon */
+.schedule-item.advanced::before {
+    background-color: #007bff; /* Blue Circle */
+}
+
+/* Weekend Icon */
+.schedule-item.weekend::before {
+    background-color: #ffc107; /* Yellow Circle */
 }
 
 /* Schedule Item Highlight */
@@ -423,7 +453,7 @@ footer {
 }
 
 .footer-logo img {
-  max-width: 100px;
+  max-width: 80px; /* Reduced from 100px */
   display: block;
   margin: 0 auto 10px;
 }
