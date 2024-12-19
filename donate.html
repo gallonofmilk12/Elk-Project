@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Donate - Lewis County Elks Rugby Club</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <!-- Stripe JS -->
+    <script src="https://js.stripe.com/v3/"></script>
+  </head>
+  <body>
+    <header>
+      <h1>Donate to Support Our Club</h1>
+    </header>
+
+    <main>
+      <p>
+        Your donation helps us provide equipment, training, and opportunities
+        for players of all ages. Select an amount to donate:
+      </p>
+      <div>
+        <button class="donate-btn" data-amount="500">Donate $5</button>
+        <button class="donate-btn" data-amount="2000">Donate $20</button>
+        <button class="donate-btn" data-amount="5000">Donate $50</button>
+      </div>
+    </main>
+
+    <footer>
+      <p>&copy; 2024 Lewis County Elks Rugby Club</p>
+    </footer>
+
+    <script>
+      // Initialize Stripe
+      const stripe = Stripe("your-publishable-key-here"); // Replace with your Stripe publishable key
+
+      // Add click handlers to donation buttons
+      document.querySelectorAll(".donate-btn").forEach((button) => {
+        button.addEventListener("click", async (event) => {
+          const amount = event.target.getAttribute("data-amount"); // Get donation amount from button
+
+          // Redirect to Stripe Checkout
+          stripe
+            .redirectToCheckout({
+              lineItems: [
+                {
+                  price_data: {
+                    currency: "usd",
+                    product_data: {
+                      name: "Donation to Lewis County Elks Rugby Club",
+                      description: "Support the team!",
+                    },
+                    unit_amount: amount, // Set amount in cents
+                  },
+                  quantity: 1,
+                },
+              ],
+              mode: "payment",
+              successUrl: "https://your-github-pages-site/success.html", // Replace with your success page URL
+              cancelUrl: "https://your-github-pages-site/cancel.html", // Replace with your cancel page URL
+            })
+            .then((result) => {
+              if (result.error) {
+                alert(result.error.message);
+              }
+            });
+        });
+      });
+    </script>
+  </body>
+</html>

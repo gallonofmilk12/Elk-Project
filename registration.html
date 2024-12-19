@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register - Lewis County Elks Rugby Club</title>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Player Registration</h1>
+      <p>Sign up to join the Lewis County Elks Rugby Club.</p>
+    </header>
+
+    <main>
+      <!-- Use your Formspree form URL -->
+      <form id="registrationForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <!-- Personal Information -->
+        <label for="name">Full Name:</label>
+        <input type="text" id="name" name="name" required />
+
+        <label for="email">Email Address:</label>
+        <input type="email" id="email" name="email" required />
+
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" required />
+
+        <!-- Emergency Contact -->
+        <h3>Emergency Contact</h3>
+        <label for="emergency_name">Contact Name:</label>
+        <input type="text" id="emergency_name" name="emergency_name" required />
+
+        <label for="emergency_phone">Contact Phone:</label>
+        <input
+          type="tel"
+          id="emergency_phone"
+          name="emergency_phone"
+          required
+        />
+
+        <!-- Player Preferences -->
+        <h3>Player Preferences</h3>
+        <label for="experience">Previous Rugby Experience:</label>
+        <select id="experience" name="experience" required>
+          <option value="none">None</option>
+          <option value="beginner">Beginner</option>
+          <option value="intermediate">Intermediate</option>
+          <option value="advanced">Advanced</option>
+        </select>
+
+        <label for="position">Preferred Position:</label>
+        <select id="position" name="position">
+          <option value="any">Any</option>
+          <option value="forward">Forward</option>
+          <option value="back">Back</option>
+          <option value="half-back">Half-Back</option>
+        </select>
+
+        <!-- Add the redirect field -->
+        <input
+          type="hidden"
+          name="_redirect"
+          value="https://your-site.github.io/success.html"
+        />
+
+        <!-- Submission -->
+        <button type="submit">Register</button>
+      </form>
+    </main>
+
+    <footer>
+      <p>&copy; 2024 Lewis County Elks Rugby Club</p>
+    </footer>
+  </body>
+</html>
