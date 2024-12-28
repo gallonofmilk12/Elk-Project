@@ -41,6 +41,51 @@ window.addEventListener("scroll", () => {
   });
 });
 
+// Navigation functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    const navContainer = document.querySelector('.nav-container');
+    const links = document.querySelectorAll('.nav-links a');
+
+    // Hamburger menu toggle
+    hamburger?.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        navLinks.classList.toggle('active');
+    });
+
+    // Sticky navigation
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 100) {
+            navContainer.classList.add('scrolled');
+        } else {
+            navContainer.classList.remove('scrolled');
+        }
+    });
+
+    // Active state management
+    const sections = document.querySelectorAll('section');
+    
+    window.addEventListener('scroll', () => {
+        let current = '';
+        
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            if (window.scrollY >= (sectionTop - sectionHeight / 3)) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        links.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').slice(1) === current) {
+                link.classList.add('active');
+            }
+        });
+    });
+});
+
 // ----------------------
 // Stripe Donation Handling
 // ----------------------

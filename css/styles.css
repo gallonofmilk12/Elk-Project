@@ -5,37 +5,148 @@
     box-sizing: border-box;
 }
 
+/* Color Variables */
+:root {
+    --brand-green: #2b5a14; /* Our primary brand green */
+    --brand-green-light: #367319; /* Lighter variation */
+    --brand-green-dark: #214510; /* Darker variation */
+    --brand-green-fade: rgba(43, 90, 20, 0.95); /* Transparent version */
+    --elk-brown: #8B4513;
+    --elk-light-brown: #A0522D;
+    --heading-font: 'Titillium Web', sans-serif;
+    --body-font: 'Roboto', sans-serif;
+    --background-warm: #f9f5f1;
+    --background-light: #f7f7f7;
+    --card-bg: #ffffff;
+
+    /* Primary Colors */
+    --primary-dark: var(--brand-green-dark);
+    --primary-light: var(--brand-green-light);
+    
+    /* Accent Colors */
+    --accent-gold: #c5a572;     /* Metallic Gold */
+    --accent-gold-hover: #d4b88c;
+    
+    /* Supporting Colors */
+    --text-dark: #222222;       /* Darker than before for better contrast */
+    --text-muted: #555555;      /* For secondary text, meets 4.5:1 on light backgrounds */
+    --text-light: #ffffff;      /* For dark backgrounds */
+    --link-color: #1a472a;      /* Ensuring links are distinguishable and contrast compliant */
+    --background-light: #f5f5f5;
+    --background-dark: #222222;
+
+    /* New Header Colors */
+    --header-bg: var(--brand-green-dark);      /* Darker green for header */
+    --header-accent: var(--brand-green);  /* Slightly lighter green for hover states */
+    --header-text: #ffffff;    /* White text */
+
+    /* Typography Scale */
+    --h1-size: clamp(2rem, 5vw, 2.5rem);
+    --h2-size: clamp(1.8rem, 4vw, 2.2rem);
+    --h3-size: clamp(1.5rem, 3vw, 1.8rem);
+    --body-large: clamp(1.1rem, 2vw, 1.3rem);
+    --body-normal: 1rem;
+    --body-small: 0.875rem;
+    
+    /* Line Heights */
+    --heading-line-height: 1.2;
+    --body-line-height: 1.6;
+}
+
+/* Base Typography */
 body {
-    font-family: 'Roboto', sans-serif;
-    line-height: 1.6;
-    color: #333;
-    background: #f9f9f9;
+    font-family: var(--body-font);
+    line-height: var(--body-line-height);
+    color: var(--text-dark);    /* Darker base text color */
+    background: var(--background-warm);
+    font-size: var(--body-normal);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--heading-font);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: var(--heading-line-height);
+    margin-bottom: 0.5em;
+    text-align: left;
 }
 
 /* Typography Updates */
-h1, h2, h3, h4, h5, h6 {
+h1 {
+    font-size: var(--h1-size);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+}
+
+h2 {
+    font-size: var(--h2-size);
+    font-weight: 800;
+}
+
+h3 {
+    font-size: var(--h3-size);
     font-weight: 700;
 }
 
 p {
     font-weight: 400;
+    color: var(--text-dark);
+    margin-bottom: 1.5em;
+    max-width: 70ch;
+    text-align: left;
+}
+
+/* Center align specific elements */
+.hero h2,
+.hero p,
+section > h2,
+.contact h2,
+.features h3 {
+    text-align: center;
 }
 
 /* Header Styles */
 header {
-    background: #333;
-    color: #fff;
+    background: var(--brand-green);
+    color: var(--header-text);
     padding: 20px;
     text-align: center;
+    border-bottom: 3px solid var(--accent-gold);
 }
 
 header h1 {
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
     font-size: 2.5rem;
+    text-align: center;
+    margin: 0 auto;
+    max-width: 1200px;
 }
 
 header p {
     margin-top: 10px;
     font-size: 1.2rem;
+}
+
+header .tagline {
+    text-align: center;
+    margin: 10px auto 0;
+    max-width: 800px;
+}
+
+/* Override general heading alignment for header */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--heading-font);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: var(--heading-line-height);
+    margin-bottom: 0.5em;
+    text-align: left;
+}
+
+header h1 {
+    text-align: center !important; /* Ensure header title stays centered */
 }
 
 /* Navigation Styles */
@@ -44,7 +155,7 @@ nav {
     align-items: center;
     justify-content: center;
     padding: 10px 20px;
-    background: #333;
+    background: var(--brand-green);
     color: #fff;
 }
 
@@ -72,26 +183,173 @@ nav a {
 }
 
 nav a:hover {
-    background: #555;
+    background: var(--header-accent);
+    border-bottom: 2px solid var(--accent-gold);
     color: #fff;
     transform: translateY(-2px);
 }
 
 nav a.active {
-    background: #28a745;
+    background: var(--elk-light-green);
     color: #fff;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-/* Hero Section */
+/* Enhanced Section Spacing */
+section {
+    padding: 80px 20px;
+    margin-bottom: 60px;
+}
+
+@media (min-width: 768px) {
+    section {
+        padding: 100px 40px;
+    }
+}
+
+/* Sticky Navigation */
+.nav-container {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: var(--header-bg);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.nav-container.scrolled {
+    padding: 10px 0;
+    background: var(--brand-green-fade); /* Using header-bg with opacity */
+    backdrop-filter: blur(10px);
+}
+
+/* Hamburger Menu */
+.hamburger {
+    display: none;
+    background: none;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.hamburger span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background: #fff;
+    margin: 5px 0;
+    transition: all 0.3s ease;
+}
+
+/* Active State Styles */
+.nav-links a.active {
+    color: var(--accent-gold);
+    position: relative;
+}
+
+.nav-links a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 2px;
+    background: var(--accent-gold);
+}
+
+/* Enhanced Mobile Navigation */
+@media (max-width: 768px) {
+    .hamburger {
+        display: block;
+    }
+
+    .nav-links {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background: var(--brand-green);
+        padding: 20px;
+        flex-direction: column;
+        align-items: center;
+        transform: translateY(-100%);
+        opacity: 0;
+        transition: all 0.3s ease;
+    }
+
+    .nav-links.active {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    .nav-links a {
+        width: 100%;
+        text-align: center;
+        padding: 15px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Hamburger Animation */
+    .hamburger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -7px);
+    }
+
+    /* Adjusted Section Spacing for Mobile */
+    section {
+        padding: 60px 20px;
+        margin-bottom: 40px;
+    }
+}
+
+/* Hero Section Enhancements */
 .hero {
     position: relative;
     text-align: center;
     padding: 120px 20px;
-    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), 
-                url('../images/rugby-field.jpg') no-repeat center center/cover;
-    color: #fff;
+    background: radial-gradient(
+        circle at center,
+        var(--brand-green) 0%,
+        rgba(249, 245, 241, 0.95) 100%
+    ),
+    url('../images/rugby-field.jpg') no-repeat center center/cover;
+    background-blend-mode: soft-light;
+    color: #333;
     margin-bottom: 60px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/png;base64,noise-texture-here');
+    opacity: 0.05;
+    pointer-events: none;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='100' height='20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 10 Q 25 20, 50 10 T 100 10' stroke='%238B4513' fill='none' stroke-width='0.5' opacity='0.1'/%3E%3C/svg%3E");
+    animation: waveMove 20s linear infinite;
+    pointer-events: none;
 }
 
 .hero h2, .hero p, .hero .donate-btn {
@@ -100,19 +358,31 @@ nav a.active {
 }
 
 .hero h2 {
-    font-size: 2.8rem;
-    font-weight: 700;
-    margin-bottom: 20px;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+    font-family: var(--heading-font);
+    font-weight: 900;
+    color: var(--elk-green);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    text-shadow: 
+        2px 2px 0 rgba(255, 255, 255, 0.7),
+        -1px -1px 0 rgba(255, 255, 255, 0.7);
+    font-size: clamp(2.2rem, 6vw, 2.8rem);
+    line-height: 1.1;
+    margin-bottom: 1rem;
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
 }
 
 .hero p {
-    font-size: 1.3rem;
-    margin-bottom: 35px;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+    font-family: var(--body-font);
+    color: var(--elk-brown);
+    font-weight: 500;
+    text-shadow: 
+        1px 1px 0 rgba(255, 255, 255, 0.9),
+        -1px -1px 0 rgba(255, 255, 255, 0.9);
+    font-size: var(--body-large);
+    margin-bottom: 2rem;
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
@@ -131,6 +401,7 @@ nav a.active {
     text-transform: uppercase;
     letter-spacing: 1px;
     font-weight: 700;
+    box-shadow: 0 4px 15px rgba(43, 90, 20, 0.3);
 }
 
 .hero .donate-btn:hover {
@@ -140,7 +411,31 @@ nav a.active {
 }
 
 .hero-logo {
-  max-width: 100px; /* Reduced from 150px */
+    max-width: 180px; /* Enlarged from 150px */
+    margin: 20px auto 40px;
+    display: block;
+    position: relative;
+    filter: drop-shadow(0 0 15px rgba(43, 90, 20, 0.5));
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.hero-logo:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 20px rgba(43, 90, 20, 0.7));
+}
+
+/* Optional: Add a circular background behind the logo */
+.hero-logo-container {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 5px 20px rgba(43, 90, 20, 0.2);
 }
 
 /* Main Content */
@@ -157,16 +452,53 @@ section {
 }
 
 section h2 {
+    font-family: var(--heading-font);
+    font-weight: 700;
+    color: var(--elk-green);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
     font-size: 2rem;
     margin-bottom: 20px;
-    color: #333;
+    position: relative;
+    display: inline-block;
+}
+
+section h2::before,
+section h2::after {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background-image: url("data:image/svg+xml,%3Csvg width='30' height='30' viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cellipse cx='15' cy='15' rx='12' ry='8' transform='rotate(-45 15 15)' stroke='%232b5a14' fill='none' stroke-width='0.5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    opacity: 0.2;
+}
+
+section h2::before {
+    left: -40px;
+    transform: rotate(-45deg);
+}
+
+section h2::after {
+    right: -40px;
+    transform: rotate(45deg);
 }
 
 section p {
     font-size: 1.1rem;
     margin-bottom: 20px;
     line-height: 1.6;
-    color: #555;
+    color: var(--text-dark);    /* Changed from #555 */
+}
+
+section:not(:last-child)::after {
+    content: '';
+    display: block;
+    height: 40px;
+    margin: 20px auto;
+    background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 0v40M0 20h40' stroke='%232b5a14' stroke-width='0.5' opacity='0.2'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 /* About Section Specific */
@@ -181,7 +513,7 @@ section p {
 }
 
 #about .features div {
-    background: #fff;
+    background: var(--card-bg);
     border: 1px solid #e0e0e0;
     border-radius: 10px;
     padding: 30px;
@@ -222,7 +554,7 @@ section p {
 }
 
 #about .features p {
-    color: #666;
+    color: var(--text-dark);    /* Changed from #666 */
     font-size: 1rem;
     line-height: 1.6;
 }
@@ -231,7 +563,7 @@ section p {
 form {
     max-width: 600px;
     margin: 20px auto;
-    background: #fff;
+    background: var(--card-bg);
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -242,6 +574,7 @@ form label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
+    color: var(--text-dark);
 }
 
 form input,
@@ -276,8 +609,8 @@ form button:hover {
 
 /* Donation Buttons */
 .donate-btn {
-    background: #28a745;
-    color: #fff;
+    background: linear-gradient(135deg, var(--elk-green), var(--elk-light-green));
+    color: #ffffff;
     border: none;
     padding: 10px 20px;
     margin: 5px;
@@ -285,10 +618,11 @@ form button:hover {
     cursor: pointer;
     border-radius: 5px;
     transition: background 0.3s;
+    font-weight: 600;
 }
 
 .donate-btn:hover {
-    background: #218838;
+    background: linear-gradient(135deg, var(--elk-brown), var(--elk-light-brown));
 }
 
 /* Training Schedule Section */
@@ -323,6 +657,10 @@ form button:hover {
   position: relative;
   padding-left: 40px; /* Space for the icon */
   margin-bottom: 20px;
+  background: var(--card-bg);
+  padding: 15px;
+  border-radius: 6px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
 .schedule-item::before {
@@ -380,12 +718,15 @@ form button:hover {
 }
 
 .faq-question {
-  background: #333;
-  color: #fff;
+  font-family: var(--heading-font);
+  font-weight: 600;
+  background: var(--background-light);
+  color: var(--text-dark);
   width: 100%;
   text-align: left;
   padding: 10px 15px;
-  font-size: 1.1rem;
+  font-size: var(--body-large);
+  line-height: 1.4;
   border: none;
   cursor: pointer;
   display: flex;
@@ -394,7 +735,12 @@ form button:hover {
 }
 
 faq-question:hover {
-  background: #444;
+  background: var(--elk-light-green);
+  color: #fff;
+}
+
+.faq-question:focus {
+  background-color: #e8e8e8;
 }
 
 .faq-icon {
@@ -406,7 +752,9 @@ faq-question:hover {
   padding: 10px 15px;
   font-size: 1rem;
   display: none;
-  background: #f9f9f9;
+  background: var(--card-bg);
+  color: var(--text-dark);
+  line-height: var(--body-line-height);
 }
 
 .faq-answer p {
@@ -436,6 +784,7 @@ faq-question:hover {
     display: flex;
     align-items: center;
     justify-content: center;
+    color: var(--text-dark);    /* Changed from #1a1a1a */
 }
 
 .contact-icon {
@@ -447,13 +796,25 @@ faq-question:hover {
 /* Footer */
 footer {
   text-align: center;
-  background: #333;
+  background: var(--brand-green);
   color: #fff;
   padding: 20px;
+  font-size: var(--body-small);
+}
+
+footer::before {
+    content: '';
+    display: block;
+    height: 50px;
+    background-image: url("data:image/svg+xml,%3Csvg width='100' height='50' viewBox='0 0 100 50' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 50v-40h80v40' stroke='white' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-top: -30px;
+    opacity: 0.2;
 }
 
 .footer-logo img {
-  max-width: 80px; /* Reduced from 100px */
+  max-width: 100px;
   display: block;
   margin: 0 auto 10px;
 }
@@ -463,7 +824,7 @@ footer {
 }
 
 footer a {
-    color: #28a745;
+    color: var(--text-light);   /* Changed from #1a1a1a for better contrast on dark background */
     text-decoration: none;
     margin: 0 10px;
     padding: 5px 10px;
@@ -475,6 +836,10 @@ footer a:hover {
     color: #fff;
     text-decoration: underline;
     transform: translateY(-2px);
+}
+
+social-links a:hover {
+    color: var(--elk-brown);
 }
 
 /* Success Message (Optional Animation) */
@@ -502,25 +867,94 @@ footer a:hover {
 
 /* Card Styles */
 .card {
-  background: #fff;
+  background: var(--card-bg);
   border: 1px solid #ddd;
   border-radius: 10px;
   padding: 20px;
-  text-align: center;
+  text-align: left;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s, box-shadow 0.3s;
   width: 250px;
+  position: relative;
+  overflow: hidden;
 }
 
 .card:hover {
   transform: translateY(-5px);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  border-color: var(--elk-green);
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cellipse cx='10' cy='10' rx='8' ry='6' transform='rotate(-45 10 10)' stroke='%238B4513' fill='none' stroke-width='0.5'/%3E%3C/svg%3E");
+    opacity: 0.2;
+}
+
+.card h3 {
+    font-family: var(--heading-font);
+    font-weight: 600;
+    color: var(--elk-brown);
+    font-size: var(--h3-size);
+    margin-bottom: 1rem;
+    text-align: left;
+}
+
+.card p {
+    color: var(--text-dark);    /* Ensuring card text is readable */
+    font-size: var(--body-normal);
+    line-height: var(--body-line-height);
 }
 
 /* Make all images responsive */
 img {
     max-width: 100%;
     height: auto;
+}
+
+/* Base styles for focus states */
+a:focus,
+button:focus {
+  outline: 3px solid #4A90E2;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Ensure focus remains visible even with other hover states */
+a:hover:focus,
+button:hover:focus {
+  outline: 3px solid #4A90E2;
+}
+
+/* Enhance contrast for navigation links */
+.nav-links a {
+  color: #1a1a1a;  /* Darker color for better contrast */
+}
+
+/* Rugby Decorative Elements */
+.rugby-pattern {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M15 20c2.5-7.5 7.5-12.5 15-15m15 15c-2.5-7.5-7.5-12.5-15-15' stroke='%232b5a14' stroke-width='0.5' fill='none' opacity='0.1'/%3E%3C/svg%3E");
+    opacity: 0.1;
+    pointer-events: none;
+}
+
+/* Animations */
+@keyframes stripeMove {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-100%); }
+}
+
+@keyframes waveMove {
+    0% { background-position: 0 0; }
+    100% { background-position: 100% 0; }
 }
 
 /* Responsive Design */
@@ -540,12 +974,11 @@ img {
     }
 
     .hero h2 {
-        font-size: 2.2rem;
+        font-size: clamp(1.8rem, 5vw, 2.2rem);
     }
 
     .hero p {
-        font-size: 1.1rem;
-        margin-bottom: 25px;
+        font-size: var(--body-normal);
     }
 
     .hero .donate-btn {
@@ -561,6 +994,12 @@ img {
         padding: 30px 15px;
     }
     
+    section p {
+        text-align: left;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
     #about .features {
         padding: 20px 10px;
     }
@@ -585,6 +1024,10 @@ img {
         gap: 15px;
         flex-wrap: wrap;
     }
+
+    .nav-links a {
+        color: var(--text-light);    /* Ensure mobile nav links are visible */
+    }
 }
 
 @media (max-width: 480px) {
@@ -599,4 +1042,116 @@ img {
     section h2 {
         font-size: 1.6rem;
     }
+}
+
+/* Apply to interactive elements */
+.learn-more-btn {
+  background-color: transparent;
+  border: 2px solid var(--accent-gold);
+  color: var(--accent-gold);
+}
+
+.learn-more-btn:hover {
+  background-color: var(--accent-gold);
+  color: var(--text-light);
+}
+
+.donate-btn, .submit-btn {
+  background-color: var(--accent-gold);
+  color: var(--text-light);
+}
+
+.donate-btn:hover, .submit-btn:hover {
+  background-color: var(--accent-gold-hover);
+}
+
+/* Navigation hover effects */
+.nav-links a:hover {
+  color: var(--accent-gold);
+}
+
+/* Program cards hover effect */
+.program-card:hover {
+  border-color: var(--accent-gold);
+  box-shadow: 0 4px 12px rgba(197, 165, 114, 0.2);
+}
+
+/* Social media icons */
+.social-links a {
+  color: var(--primary-dark);
+}
+
+.social-links a:hover {
+  color: var(--accent-gold);
+}
+
+/* FAQ toggle icons */
+.faq-icon {
+  color: var(--accent-gold);
+}
+
+/* Form focus states */
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: var(--accent-gold);
+  box-shadow: 0 0 0 2px rgba(197, 165, 114, 0.2);
+}
+
+/* Update placeholder color for better contrast */
+::placeholder {
+    color: #666666;             /* Meets contrast requirements */
+    opacity: 1;
+}
+
+/* Hero Section */
+.hero {
+  padding: 4rem 2rem;
+  text-align: center;
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+              url('../images/rugby-field.jpg') center/cover;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero h2 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 900;
+  color: #FFFFFF;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+  margin-bottom: 0.5em;
+  max-width: 800px;
+}
+
+.hero p {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: #F5F5F5;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+  max-width: 600px;
+  margin: 0 auto 2rem;
+}
+
+/* Section Headings */
+section h2 {
+  font-size: 2.5rem;
+  color: #2A2A2A;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* Content Typography */
+.about-intro, 
+.contact-intro {
+  font-size: 1.2rem;
+  max-width: 800px;
+  margin: 0 auto 2rem;
+  text-align: center;
+}
+
+.card h3,
+.program-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
 }
