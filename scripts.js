@@ -57,9 +57,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Sticky navigation
     window.addEventListener('scroll', () => {
         if (window.scrollY > 100) {
-            navContainer.classList.add('scrolled');
+            navContainer?.classList.add('scrolled');
         } else {
-            navContainer.classList.remove('scrolled');
+            navContainer?.classList.remove('scrolled');
         }
     });
 
@@ -81,6 +81,68 @@ document.addEventListener('DOMContentLoaded', function() {
             link.classList.remove('active');
             if (link.getAttribute('href').slice(1) === current) {
                 link.classList.add('active');
+            }
+        });
+    });
+
+    // FAQ Accordion
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+        const button = item.querySelector('.faq-question');
+        if (button) {
+            button.addEventListener('click', () => {
+                item.classList.toggle('open');
+                const icon = button.querySelector('.faq-icon');
+                icon.textContent = item.classList.contains('open') ? '-' : '+';
+            });
+        }
+    });
+
+    // Mobile Navigation
+    // Using previously declared hamburger and navLinks
+    if (hamburger && navLinks) {
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+    }
+
+    // Smooth scroll for navigation links
+    document.querySelectorAll('nav a').forEach(link => {
+        link.addEventListener('click', function(e) {
+            if (this.getAttribute('href').startsWith('#')) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').slice(1);
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        });
+    });
+
+    // Loading spinner functionality
+    const showLoading = () => {
+        const spinner = document.querySelector('.loading-spinner');
+        if (spinner) {
+            spinner.style.display = 'block';
+            document.body.classList.add('loading');
+        }
+    };
+
+    const hideLoading = () => {
+        const spinner = document.querySelector('.loading-spinner');
+        if (spinner) {
+            spinner.style.display = 'none';
+            document.body.classList.remove('loading');
+        }
+    };
+
+    // Add loading state to navigation
+    document.querySelectorAll('nav a').forEach(link => {
+        link.addEventListener('click', (e) => {
+            if (!link.getAttribute('href').startsWith('#')) {
+                showLoading();
             }
         });
     });
@@ -174,5 +236,50 @@ document.querySelectorAll('.faq-question').forEach(button => {
     
     const icon = button.querySelector('.faq-icon');
     icon.textContent = faqItem.classList.contains('open') ? '-' : '+';
+  });
+});
+
+// ----------------------
+// Loading State Management
+// ----------------------
+
+const showLoading = () => {
+  document.querySelector('.loading-spinner').style.display = 'block';
+  document.body.classList.add('loading');
+};
+
+const hideLoading = () => {
+  document.querySelector('.loading-spinner').style.display = 'none';
+  document.body.classList.remove('loading');
+};
+
+// Add loading state to navigation
+document.querySelectorAll('nav a').forEach(link => {
+  link.addEventListener('click', (e) => {
+    if (!link.getAttribute('href').startsWith('#')) {
+      showLoading();
+    }
+  });
+});
+
+// Add loading state to form submission
+document.querySelector('.contact-form').addEventListener('submit', (e) => {
+  e.preventDefault();
+  showLoading();
+  // Simulate form submission
+  setTimeout(() => {
+    hideLoading();
+    alert('Message sent successfully!');
+  }, 1000);
+});
+
+// ----------------------
+// Tooltip Initialization
+// ----------------------
+
+document.querySelectorAll('[data-tooltip]').forEach(element => {
+  element.addEventListener('mouseenter', (e) => {
+    const tooltip = e.target.getAttribute('data-tooltip');
+    // Tooltip logic handled by CSS
   });
 });
