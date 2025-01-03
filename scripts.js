@@ -85,17 +85,27 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // FAQ Accordion
+    // FAQ Accordion - Simplified and Fixed
     const faqItems = document.querySelectorAll('.faq-item');
+    
     faqItems.forEach(item => {
         const button = item.querySelector('.faq-question');
-        if (button) {
-            button.addEventListener('click', () => {
-                item.classList.toggle('open');
-                const icon = button.querySelector('.faq-icon');
-                icon.textContent = item.classList.contains('open') ? '-' : '+';
+        const answer = item.querySelector('.faq-answer');
+        
+        button.addEventListener('click', () => {
+            // Close all other FAQs
+            faqItems.forEach(otherItem => {
+                if (otherItem !== item) {
+                    otherItem.querySelector('.faq-answer').style.display = 'none';
+                    otherItem.querySelector('.faq-icon').textContent = '+';
+                }
             });
-        }
+
+            // Toggle current FAQ
+            const isOpen = answer.style.display === 'block';
+            answer.style.display = isOpen ? 'none' : 'block';
+            button.querySelector('.faq-icon').textContent = isOpen ? '+' : '-';
+        });
     });
 
     // Mobile Navigation
@@ -237,6 +247,29 @@ document.querySelectorAll('.faq-question').forEach(button => {
     const icon = button.querySelector('.faq-icon');
     icon.textContent = faqItem.classList.contains('open') ? '-' : '+';
   });
+});
+
+document.querySelectorAll('.faq-question').forEach(button => {
+    button.addEventListener('click', () => {
+        const faqItem = button.parentElement;
+        const answer = button.nextElementSibling;
+        const icon = button.querySelector('.faq-icon');
+        
+        // Close all other FAQ items
+        document.querySelectorAll('.faq-item').forEach(item => {
+            if (item !== faqItem && item.querySelector('.faq-answer').hasAttribute('hidden') === false) {
+                item.querySelector('.faq-answer').hidden = true;
+                item.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+                item.querySelector('.faq-icon').textContent = '+';
+            }
+        });
+
+        // Toggle current FAQ item
+        const isExpanded = button.getAttribute('aria-expanded') === 'true';
+        button.setAttribute('aria-expanded', !isExpanded);
+        answer.hidden = isExpanded;
+        icon.textContent = isExpanded ? '+' : '-';
+    });
 });
 
 // ----------------------
