@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Donate - Lewis County Elks Rugby Club</title>
-    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="../css/styles.css" />
     <!-- Stripe JS -->
     <script src="https://js.stripe.com/v3/"></script>
   </head>
@@ -27,7 +27,7 @@
 
     <footer>
       <div class="footer-logo">
-        <img src="images/elk.webp" alt="Lewis County Elks Rugby Logo">
+        <img src="../images/elk.webp" alt="Lewis County Elks Rugby Logo" />
       </div>
       <p>&copy; 2024 Lewis County Elks Rugby Club</p>
     </footer>
@@ -58,8 +58,8 @@
                 },
               ],
               mode: "payment",
-              successUrl: "https://your-github-pages-site/success.html", // Replace with your success page URL
-              cancelUrl: "https://your-github-pages-site/cancel.html", // Replace with your cancel page URL
+              successUrl: window.location.origin + "/HTML/success.html", // Replace with your success page URL
+              cancelUrl: window.location.origin + "/HTML/cancel.html", // Replace with your cancel page URL
             })
             .then((result) => {
               if (result.error) {

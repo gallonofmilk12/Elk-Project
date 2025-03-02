@@ -655,20 +655,24 @@ form button:hover {
 
 /* Donation Buttons */
 .donate-btn {
-    background: linear-gradient(135deg, var(--elk-green), var(--elk-light-green));
-    color: #ffffff;
+    background: linear-gradient(135deg, var(--brand-green), var(--brand-green-light));
+    color: #fff;
+    padding: 15px 35px;
+    font-size: 1.2rem;
     border: none;
-    padding: 10px 20px;
-    margin: 5px;
-    font-size: 1rem;
+    border-radius: 6px;
     cursor: pointer;
-    border-radius: 5px;
-    transition: background 0.3s;
-    font-weight: 600;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+    box-shadow: 0 4px 15px rgba(43, 90, 20, 0.3);
 }
 
 .donate-btn:hover {
-    background: linear-gradient(135deg, var(--elk-brown), var(--elk-light-brown));
+    background: linear-gradient(135deg, var(--brand-green-dark), var(--brand-green));
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
 
 /* Training Schedule Section */
@@ -790,7 +794,8 @@ form button:hover {
 }
 
 .faq-answer {
-    display: none; /* Change from hidden attribute to display none */
+    display: none;
+    /* Change from hidden attribute to display none */
     padding: 1rem;
     background-color: #f9f9f9;
 }
@@ -1228,8 +1233,7 @@ button:hover:focus {
 .hero {
     padding: 4rem 2rem;
     text-align: center;
-    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-        url('../images/rugby-field.jpg') center/cover;
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6));
     min-height: 80vh;
     display: flex;
     flex-direction: column;
@@ -1504,4 +1508,9 @@ section h2 {
         width: 100%;
         align-items: center;
     }
+}
+
+.white-text {
+    color: var(--header-text);
+    /* Uses the same white as header titles */
 }
