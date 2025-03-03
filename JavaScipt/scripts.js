@@ -4,26 +4,32 @@
 // Navigation Interactions
 // ----------------------
 
-// Smooth scroll for navigation links
+// Smooth scroll for navigation links - Modified to only apply to anchor links
 document.querySelectorAll("nav a").forEach((link) => {
   link.addEventListener("click", function (event) {
-    event.preventDefault();
-    const targetId = this.getAttribute("href").slice(1);
-    const targetElement = document.getElementById(targetId);
+    const href = this.getAttribute("href");
 
-    if (targetElement) {
-      window.scrollTo({
-        top: targetElement.offsetTop,
-        behavior: "smooth",
-      });
+    // Only handle smooth scrolling for anchor links (starting with #)
+    if (href.startsWith("#")) {
+      event.preventDefault();
+      const targetId = href.slice(1);
+      const targetElement = document.getElementById(targetId);
+
+      if (targetElement) {
+        window.scrollTo({
+          top: targetElement.offsetTop,
+          behavior: "smooth",
+        });
+      }
     }
+    // For external links (like the Stripe donation link), let the browser handle it normally
   });
 });
 
-// Highlight active section in navigation
+// Highlight active section in navigation - only apply to page section links
 window.addEventListener("scroll", () => {
   const sections = document.querySelectorAll("section");
-  const navLinks = document.querySelectorAll("nav a");
+  const navLinks = document.querySelectorAll("nav a[href^='#']"); // Only select links that start with #
 
   let currentSection = "";
   sections.forEach((section) => {
@@ -63,9 +69,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // Active state management
+  // Active state management - modified to only apply to anchor links
   const sections = document.querySelectorAll("section");
-
   window.addEventListener("scroll", () => {
     let current = "";
 
@@ -77,7 +82,9 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
 
-    links.forEach((link) => {
+    // Only select links that point to page sections
+    const pageLinks = document.querySelectorAll("nav a[href^='#']");
+    pageLinks.forEach((link) => {
       link.classList.remove("active");
       if (link.getAttribute("href").slice(1) === current) {
         link.classList.add("active");
@@ -134,10 +141,16 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   };
 
-  // Add loading state to navigation
+  // Add loading state to navigation - Modified to skip external links with target="_blank"
   document.querySelectorAll("nav a").forEach((link) => {
     link.addEventListener("click", (e) => {
-      if (!link.getAttribute("href").startsWith("#")) {
+      // Skip showing loading spinner for:
+      // 1. Page section links (starting with #)
+      // 2. Links that open in new tabs
+      if (
+        !link.getAttribute("href").startsWith("#") &&
+        !link.hasAttribute("target")
+      ) {
         showLoading();
       }
     });
@@ -268,10 +281,16 @@ const hideLoading = () => {
   document.body.classList.remove("loading");
 };
 
-// Add loading state to navigation
+// Add loading state to navigation - Modified to skip external links with target="_blank"
 document.querySelectorAll("nav a").forEach((link) => {
   link.addEventListener("click", (e) => {
-    if (!link.getAttribute("href").startsWith("#")) {
+    // Skip showing loading spinner for:
+    // 1. Page section links (starting with #)
+    // 2. Links that open in new tabs
+    if (
+      !link.getAttribute("href").startsWith("#") &&
+      !link.hasAttribute("target")
+    ) {
       showLoading();
     }
   });

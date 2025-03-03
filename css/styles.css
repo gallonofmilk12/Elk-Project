@@ -1176,7 +1176,16 @@ button:hover:focus {
 .hero-buttons {
     display: flex;
     justify-content: center;
+    gap: 1rem;
+    /* Add gap between buttons */
     margin-top: 2rem;
+    flex-wrap: wrap;
+    /* Allow wrapping on small screens */
+}
+
+.hero-buttons .donate-btn {
+    min-width: 140px;
+    /* Ensure buttons have reasonable width */
 }
 
 .donate-btn,

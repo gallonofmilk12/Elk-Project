@@ -6,7 +6,7 @@
     <title>Donate - Lewis County Elks Rugby Club</title>
     <link rel="stylesheet" href="../css/styles.css" />
     <!-- Stripe JS -->
-    <script src="https://js.stripe.com/v3/"></script>
+    <script src="https://buy.stripe.com/bIY15R2LP9ec8eI000"></script>
   </head>
   <body>
     <header>
@@ -34,11 +34,12 @@
 
     <script>
       // Initialize Stripe
-      const stripe = Stripe("your-publishable-key-here"); // Replace with your Stripe publishable key
+      const stripe = Stripe("https://buy.stripe.com/bIY15R2LP9ec8eI000"); // Replace with your Stripe publishable key
 
       // Add click handlers to donation buttons
       document.querySelectorAll(".donate-btn").forEach((button) => {
         button.addEventListener("click", async (event) => {
+          window.location.href = "https://buy.stripe.com/bIY15R2LP9ec8eI000";
           const amount = event.target.getAttribute("data-amount"); // Get donation amount from button
 
           // Redirect to Stripe Checkout
